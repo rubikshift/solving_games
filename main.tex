@@ -4,12 +4,18 @@
     %\usepackage[utf8]{inputenc}
     \usepackage{polski}
     \usepackage{babel}
+    \usepackage{graphicx}
+    \usepackage{outlines}
+    \usepackage{algorithm2e}
 
-    \usetheme{Madrid}
+    \newtheorem{mdfn}{Definicja}
+
+    \usetheme{Frankfurt}
 
     \title{Rozwiązywanie gier}
     \author{Michał Krakowiak}
-    \date{Gdańsk, \texorpdfstring{$2019$}{2019}}
+    \subtitle{Wybrane problemy algorytmiczne i technologiczne, seminarium}
+    \date{Gdańsk, 2019}
 
 \begin{document}
     \frame{\titlepage}
@@ -22,7 +28,29 @@
         \subsection{Definicja gry}
             \begin{frame}
                 \frametitle{Definicja gry}
+                \begin{mdfn}
+                    gra
+                \end{mdfn}
             \end{frame}
+        \subsection{Klasyfikacja gier}
+            \subsubsection{Ze względu na liczbę graczy}
+                \begin{frame}
+                    \frametitle{Klasyfikacja ze względu na liczbę graczy}
+                    \begin{outline}
+                        \1 0 graczy \pause automaty \pause
+                            \2 gra w życie \textit{(Conway's game of life)}\pause
+                        \1 1 gracz \pause puzzle \pause
+                            \2 sokoban \pause
+                        \1 2 graczy \pause
+                            \2 szachy \pause
+                            \2 warcaby \pause
+                            \2 kółko i krzyżyk
+                    \end{outline}
+                \end{frame}
+            \subsubsection{Ze względu na złożoność}
+                \begin{frame}
+                    \frametitle{Klasyfikacja ze względu na złożoność}
+                \end{frame}
     \section{Klasyfikacja rozwiązań}
         \subsection{Przegląd}
             \begin{frame}
@@ -48,23 +76,41 @@
             \end{frame}
             \begin{frame}
                 \frametitle{Kółko i krzyżyk}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.55\textwidth,natwidth=480,natheight=480]{images/480px-Tictactoe-X.svg.png}
+                    \caption{Optymalna gra dla X}
+                \end{figure}
             \end{frame}
-    \section{Przykłady gier o znanych rozwiązaniach}
-            \subsection{Kółko i krzyżyk}
-            \subsection{Nim}
-            \subsection{Szachy na małych planszach}
-            \subsection{Warcaby}
+        \subsubsection{Kółko i krzyżyk}
+            \begin{frame}
+                \frametitle{Kółko i krzyżyk}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.55\textwidth,natwidth=480,natheight=480]{images/480px-Tictactoe-O.svg.png}
+                    \caption{Optymalna gra dla O}
+                \end{figure}
+            \end{frame}
     \section{Szachy}
         \begin{frame}
             \frametitle{Szachy}
+            \begin{figure}[]
+                \centering
+                \includegraphics[width=0.55\textwidth]{images/chess.png}
+                \caption{Szachy klasyczne}
+            \end{figure}
         \end{frame}
         \subsection{Problematyka}
             \begin{frame}
-               \frametitle{} 
+               \frametitle{Problematyka} 
             \end{frame}
         \subsection{Minimax}
             \begin{frame}
-                
+                \begin{algorithm}[H]
+                    \KwIn{test}
+                    \KwOut{test}
+                \caption{TEST}
+                \end{algorithm}
             \end{frame}
         \subsection{NegaMax}
             \begin{frame}
@@ -75,6 +121,7 @@
             \end{frame}
     \section{Literatura}
         \begin{frame}
+            \frametitle{Literatura}
             \begin{thebibliography}{9}
                 \bibitem{PLACEHOLDER}PLACEHOLDER
             \end{thebibliography}
