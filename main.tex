@@ -3,6 +3,7 @@
     \usepackage{fontspec}                 % żeby ustawić czcionkę na systemową (Arial)
     \usepackage[utf8x]{inputenc}
     \usepackage{polski}
+    \usepackage{multicol}
     \usepackage{babel}
     \usepackage{hyperref}
     \usepackage{graphicx}
@@ -24,7 +25,9 @@
         \subsection{Zawartość}
             \begin{frame}
                 \frametitle{Zawartość}
-                \tableofcontents[pausesections]
+                \begin{multicols}{2}
+                    \tableofcontents[pausesections]                    
+                \end{multicols}
             \end{frame}
         \subsection{Tło historyczne}
             \begin{frame}
@@ -70,6 +73,7 @@
                     \item<3-> \textbf{Nie jest wymagane określenie żadnego z ruchów idealnej gry}
                 \end{itemize}
             \end{frame}
+            
         \subsection{Słabe}
             \begin{frame}
                 \frametitle{Rozwiązania słabe}
@@ -78,6 +82,20 @@
                     \item<2-> Dzięki podanemu algorytmowi uzyskano przynajmniej jedną \textit{idealną grę} oraz podano dowód, że każdy ruch jest optymalny dla gracza, który go wykonuje                    
                 \end{itemize}     
             \end{frame}
+            \subsubsection{Warcaby}
+                \begin{frame}
+                    \frametitle{Warcaby}
+                \end{frame}
+            \subsection{Szachy Gardnera 5x5}
+                \begin{frame}
+                    \frametitle{Szachy Gardnera 5x5}
+                    % https://chess.stackexchange.com/questions/24042/studying-why-gardners-minichess-variant-is-solved
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.55\textwidth]{images/gardner.png}
+                        \caption{Startowe ułożenie w szachach gardnera 5x5}
+                    \end{figure}
+                \end{frame}
         \subsection{Mocne}
             \begin{frame}
                 \frametitle{Rozwiązania mocne}
@@ -108,6 +126,10 @@
             \begin{frame}
                 \frametitle{Nim}                
             \end{frame}
+        \subsubsection{Zgadnij kto to?}
+            \begin{frame}
+                \frametitle{Zgadnij kto to?}
+            \end{frame}
     \section{Szachy}
         \begin{frame}
             \frametitle{Szachy}
@@ -129,26 +151,42 @@
                 \caption{TEST}
                 \end{algorithm}
             \end{frame}
-        \subsection{Negamax}
+        \subsection{Heurystyki}
             \begin{frame}
-                \frametitle{Negamax}
-                %https://en.wikipedia.org/wiki/Negamax
+                \frametitle{Heurystyki}                
             \end{frame}
-        \subsection{Alfa-Beta Pruning}
-            \begin{frame}
-                \frametitle{Alfa-Beta Pruning}
-                %https://en.wikipedia.org/wiki/Alpha–beta_pruning
-            \end{frame}
-        \subsection{Killer heuristic}
-            \begin{frame}
-                \frametitle{Killer heuristic}
-            \end{frame}
+            \subsubsection{Negamax}
+                \begin{frame}
+                    \frametitle{Negamax}
+                    %https://en.wikipedia.org/wiki/Negamax
+                \end{frame}
+            \subsubsection{Alfa-Beta Pruning}
+                \begin{frame}
+                    \frametitle{Alfa-Beta Pruning}
+                    %https://en.wikipedia.org/wiki/Alpha–beta_pruning
+                \end{frame}
+            \subsubsection{Funkcja oceniająca}
+                \begin{frame}
+                    \frametitle{Funkcja oceniająca}
+                    %https://en.wikipedia.org/wiki/Evaluation_function
+                \end{frame}
+            \subsubsection{Killer heuristic}
+                \begin{frame}
+                    \frametitle{Killer heuristic}
+                    %https://en.wikipedia.org/wiki/Killer_heuristic
+                \end{frame}
+            \subsubsection{Monte Carlo tree search}
+                \begin{frame}
+                    \frametitle{Monte Carlo tree search}
+                    %https://en.wikipedia.org/wiki/Monte_Carlo_tree_search
+                \end{frame}
     \section{Literatura}
         \begin{frame}
             \frametitle{Literatura}
             \begin{thebibliography}{9}
                 \bibitem{ai_history}Andrey Kurenkov, \emph{A 'Brief' History of Game AI Up To AlphaGo}, \url{https://www.andreykurenkov.com/writing/ai/a-brief-history-of-game-ai/} (data dostępu: 26.10.2019)
                 \bibitem{wiki_solved_game}Wikipedia, \emph{Solved game}, \url{https://en.wikipedia.org/wiki/Solved_game} (data dostępu: 26.10.2019)
+                \bibitem{minichess}Mehdi Mhalla, Fr\'ed\'eric Prost, \emph{Gardner’s Minichess Variant is solved}, \url{https://arxiv.org/pdf/1307.7118.pdf} (data dostępu: 27.10.219)
             \end{thebibliography}
         \end{frame}
 \end{document}
