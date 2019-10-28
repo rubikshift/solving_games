@@ -40,7 +40,10 @@
         \subsection{Definicja gry}
             \begin{frame}
                 \frametitle{Czym jest gra?}
-                Krótki opis pojęcia gry
+                    \begin{mdfn}
+                        Gra jest opisem strategicznej interakcji, która narzuca ograniczenia na udział graczy oraz akcje jakie mogą podjąć \cite{course_gt}.
+                        %A game is a description of strategic interaction that includes the constraints on the actions that the players can take and the players’ interests, but does not specify the actions that the players do take. A solution is a systematic description of the outcomes that may emerge in a family of games. Game theory suggests reasonable solutions for classes of games and examines their properties.
+                    \end{mdfn}
             \end{frame}
             \begin{frame}
                 \frametitle{Gra w ujęciu kombinatorycznym}
@@ -48,8 +51,8 @@
                 \begin{itemize}
                     \item<2-> Udział tylko dwóch graczy
                     \item<3-> Przebieg nie zależy od czynników losowych
-                    \item<4-> Gracze wykonują ruchy naprzemiennie \textit{(ang. Sequential)}
-                    \item<5-> Gracze posiadają pełną wiedzę o stanie gry \textit{(ang. Perfect information)}
+                    \item<4-> Gracze wykonują ruchy naprzemiennie
+                    \item<5-> Gracze posiadają pełną wiedzę o stanie gry
                     \item<6-> Gra kończy się po skończonej liczbie ruchów
                     \item<7-> Wygrywa gracz, który wykona ostatni ruch
                 \end{itemize}
@@ -59,22 +62,118 @@
             \begin{frame}
                 \frametitle{Klasyfikacja rozwiązań}
                 \begin{itemize}
-                    \item<1-> Ultra słabe
+                    \item<1-> Mocne
                     \item<2-> Słabe
-                    \item<3-> Mocne
+                    \item<3-> Ultra słabe
                 \end{itemize}
             \end{frame}
-        \subsection{Ultra słabe}
+        \subsection{Mocne}
             \begin{frame}
-                \frametitle{Rozwiązania ultra słabe}
+                \frametitle{Rozwiązania mocne}
                 \begin{itemize}
-                    \item<1-> Udowodniono, że gracz wygrywa/przegrywa/remisuje ze startowej pozycji, jeżeli wszyscy grają idealnie \textit{(ang. perfect play)}
-                    \item<2-> Przeprowadzony dowód może być niekonstruktywny
-                    \item<3-> \textbf{Nie jest wymagane określenie żadnego z ruchów idealnej gry}
+                    \item<1-> Jest znany algorytm pozwalający uzyskać najlepsze ruchy z każdej pozycji (nawet jeżeli, któryś z graczy popełnił błąd)
+                    \item<2-> Częste wykorzystanie metod siłowych
+                    \item<3-> Dowód może nie być pomocny w zrozumieniu powodów dlaczego dana gra jest rozwiązywalna
                 \end{itemize}
             \end{frame}
-            
-        \subsection{Słabe}
+            \subsubsection{Kółko i krzyżyk}
+                \begin{frame}
+                    \frametitle{Kółko i krzyżyk}
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.55\textwidth,natwidth=480,natheight=480]{images/480px-Tictactoe-X.svg.png}
+                        \caption{Optymalna gra dla X}
+                    \end{figure}
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Kółko i krzyżyk}
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.55\textwidth,natwidth=480,natheight=480]{images/480px-Tictactoe-O.svg.png}
+                        \caption{Optymalna gra dla O}
+                    \end{figure}
+                \end{frame}
+            \subsubsection{Nim}
+                \begin{frame}
+                    \frametitle{Nim} 
+                        \begin{itemize}
+                            \item<1-> Matematyczna gra strategiczna
+                            \item<2-> Gracze na przemian zabiera \textit{pionki} z jednego z kilku stosów
+                            \item<3-> W czasie ruchu gracz bierze dowolną niezerową liczbę pionków.
+                            \item<4-> W jednym ruchu można zabierać pionki z tylko jednego stosu
+                            \item<5-> W klasycznej wersji wygrywa gracz, który zabierze ostatniego pionka
+                        \end{itemize}               
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Nim}
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.6\textwidth]{images/nim_game}
+                        \caption{Przykładowa rozgrywka w nim}
+                    \end{figure}
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Nim - strategia}
+                        \begin{itemize}
+                            \item<1->Kombinatoryczna teoria gier definiuje działanie tzw. \textit{nimsumy} $x \oplus y$
+                            \item<2-> Działanie jest także znane jako \textit{alternatywa wykluczająca}, czyli xor
+                            \item<3-> $(a \oplus b) \oplus c = a \oplus (b \oplus c)$
+                            \item<4-> $a \oplus b = b \oplus a$
+                            \item<5-> $0 \oplus a = a$
+                            \item<6-> $a \oplus a = 0$
+                        \end{itemize}
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Nim - strategia}
+                        \begin{mdfn}
+                            Gracz rozpoczynający ma wygrywającą strategię wtedy i tylko wtedy gdy nimsuma rozmiarów stosów jest niezerowa. W przeciwnym razie drugi gracz posiada strategię wygrywającą.
+                        \end{mdfn} 
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Nim - strategia}
+                    \begin{itemize}
+                        \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
+                        \item<2-> Niech $t = y_1 \oplus ... \oplus y_n$
+                        \item<3-> $t = 0 \oplus t $ 
+                        \item<4-> $t = (s \oplus s) \oplus t$
+                        \item<5-> $t = s \oplus (s \oplus t)$
+                        \item<6-> $t = s \oplus (x_1 \oplus ... \oplus x_n) \oplus (y_1 \oplus ... \oplus y_n)$
+                        \item<7-> $t = s \oplus (x_1 \oplus y_1) \oplus ... \oplus (x_n \oplus y_n) $
+                        \item<8-> $t = s \oplus 0 \oplus ... \oplus 0 \oplus (x_k \oplus y_n) \oplus 0 \oplus ... \oplus 0$
+                        \item<9-> $t = s \oplus x_k \oplus y_k$
+                        \item<10-> Następnie trzeba udowodnić dwa przypadki
+                    \end{itemize}
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Nim - strategia}
+                    \begin{itemize}
+                        \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
+                        \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
+                        \item<1-> $t = s \oplus x_k \oplus y_k$
+                        \item<2-> Jeżeli $s = 0,$ to $t \neq 0$, gracz wykonujący ruch przegrywa
+                        \item<3-> Jeżeli nie ma już możliwych ruchów, gra się kończyła i gracz już przegrał
+                        \item<4-> Każdy możliwy ruch sprawia, że $t = x_k \oplus y_k$
+                        \item<5-> $x_k \oplus y_k \neq 0$, ponieważ gracz musi pobrać niezerową liczbę elementów, więc $x_k \neq y_k$
+                    \end{itemize}
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Nim - strategia}
+                    \begin{itemize}
+                        \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
+                        \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
+                        \item<1-> $t = s \oplus x_k \oplus y_k$
+                        \item<2-> Jeżeli $s \neq 0,$ to możliwe jest wykonanie takiego ruchu, że $t = 0$, gracz wykonujący ruch wygrywa
+                        \item<3-> $t = 0 \oplus x_k \oplus y_k \pause = x_k \oplus y_k$
+                        \item<4-> Żeby $t = 0$, to $x_k \oplus y_k = 0 \pause \rightarrow x_k = y_k$ \pause
+                    \end{itemize}
+                    $\qed$
+                    %obrazki ilustrujące stan gry
+                \end{frame}
+        \subsubsection{Zgadnij kto to?}
+            \begin{frame}
+                \frametitle{Zgadnij kto to?}
+            \end{frame}
+            \subsection{Słabe}
             \begin{frame}
                 \frametitle{Rozwiązania słabe}
                 \begin{itemize}
@@ -86,7 +185,7 @@
                 \begin{frame}
                     \frametitle{Warcaby}
                 \end{frame}
-            \subsection{Szachy Gardnera 5x5}
+            \subsubsection{Szachy Gardnera 5x5}
                 \begin{frame}
                     \frametitle{Szachy Gardnera 5x5}
                     % https://chess.stackexchange.com/questions/24042/studying-why-gardners-minichess-variant-is-solved
@@ -96,40 +195,19 @@
                         \caption{Startowe ułożenie w szachach gardnera 5x5}
                     \end{figure}
                 \end{frame}
-        \subsection{Mocne}
+
+        \subsection{Ultra słabe}
             \begin{frame}
-                \frametitle{Rozwiązania mocne}
+                \frametitle{Rozwiązania ultra słabe}
                 \begin{itemize}
-                    \item<1-> Jest znany algorytm pozwalający uzyskać najlepsze ruchy z każdej pozycji (nawet jeżeli, któryś z graczy popełnił błąd)
-                    \item<2-> Częste wykorzystanie metod siłowych \textit{(ang. brute force)} 
-                    \item<3-> Dowód może nie być pomocny w zrozumieniu powodów dlaczego dana gra jest rozwiązywalna
+                    \item<1-> Udowodniono, że gracz wygrywa/przegrywa/remisuje ze startowej pozycji, jeżeli wszyscy grają optymalnie \textit{(ang. perfect play)}
+                    \item<2-> Przeprowadzony dowód może być niekonstruktywny
+                    \item<3-> \textbf{Nie jest wymagane określenie żadnego z ruchów idealnej gry}
+                    % go,
+                    %kradziez strategii
                 \end{itemize}
             \end{frame}
-            \begin{frame}
-                \frametitle{Kółko i krzyżyk}
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=0.55\textwidth,natwidth=480,natheight=480]{images/480px-Tictactoe-X.svg.png}
-                    \caption{Optymalna gra dla X}
-                \end{figure}
-            \end{frame}
-        \subsubsection{Kółko i krzyżyk}
-            \begin{frame}
-                \frametitle{Kółko i krzyżyk}
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=0.55\textwidth,natwidth=480,natheight=480]{images/480px-Tictactoe-O.svg.png}
-                    \caption{Optymalna gra dla O}
-                \end{figure}
-            \end{frame}
-        \subsubsection{Nim}
-            \begin{frame}
-                \frametitle{Nim}                
-            \end{frame}
-        \subsubsection{Zgadnij kto to?}
-            \begin{frame}
-                \frametitle{Zgadnij kto to?}
-            \end{frame}
+            
     \section{Szachy}
         \begin{frame}
             \frametitle{Szachy}
@@ -138,6 +216,8 @@
                 \includegraphics[width=0.55\textwidth]{images/chess.png}
                 \caption{Szachy klasyczne}
             \end{figure}
+            %podzial na otwarcie, gra srodkowa, koncowki
+            %retro grade
         \end{frame}
         \subsection{Problematyka}
             \begin{frame}
@@ -174,6 +254,8 @@
                 \begin{frame}
                     \frametitle{Killer heuristic}
                     %https://en.wikipedia.org/wiki/Killer_heuristic
+                    %na koniec
+                    %heurystyka ruchu zerowego null move, jako przyklad tylko
                 \end{frame}
             \subsubsection{Monte Carlo tree search}
                 \begin{frame}
@@ -184,6 +266,7 @@
         \begin{frame}
             \frametitle{Literatura}
             \begin{thebibliography}{9}
+                \bibitem{course_gt}Martin J. Osborne, Ariel Rubinstein, The MIT Press, \emph{A course in Game Theory}, 1994
                 \bibitem{ai_history}Andrey Kurenkov, \emph{A 'Brief' History of Game AI Up To AlphaGo}, \url{https://www.andreykurenkov.com/writing/ai/a-brief-history-of-game-ai/} (data dostępu: 26.10.2019)
                 \bibitem{wiki_solved_game}Wikipedia, \emph{Solved game}, \url{https://en.wikipedia.org/wiki/Solved_game} (data dostępu: 26.10.2019)
                 \bibitem{minichess}Mehdi Mhalla, Fr\'ed\'eric Prost, \emph{Gardner’s Minichess Variant is solved}, \url{https://arxiv.org/pdf/1307.7118.pdf} (data dostępu: 27.10.219)
