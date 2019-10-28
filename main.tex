@@ -1,5 +1,6 @@
 \documentclass[polish,envcountsect,10pt]{beamer}
     \usepackage[T1]{fontenc}
+    \usepackage{listings}
     \usepackage{fontspec}                 % żeby ustawić czcionkę na systemową (Arial)
     \usepackage[utf8x]{inputenc}
     \usepackage{polski}
@@ -11,6 +12,8 @@
     \usepackage{algorithm2e}
 
     \newtheorem{mdfn}{Definicja}
+    \newtheorem{lmt}{Lemat}
+
 
     \usetheme{Frankfurt}
 
@@ -79,43 +82,101 @@
             \subsubsection{Kółko i krzyżyk}
                 \begin{frame}
                     \frametitle{Kółko i krzyżyk}
-                    \begin{figure}[H]
-                        \centering
-                        \includegraphics[width=0.55\textwidth,natwidth=480,natheight=480]{images/480px-Tictactoe-X.svg.png}
-                        \caption{Optymalna gra dla X}
-                    \end{figure}
+                    \begin{columns}
+                        \column{0.6\textwidth}
+                            \begin{itemize}
+                                \item<1-> Gra jest trywialna, ze względu na niewielkie drzewo gry
+                                \item<2-> Teoretyczna liczba stanów to $3^9 = 19683$
+                                \item<3-> Nie każdy stan jest możliwy
+                                \item<4-> Niektóre stany są tożsame
+                                \item<7-> W rezultacie jest tylko $765$ różnych stanów \cite{tictactoe}
+                            \end{itemize}
+                        \column{0.4\textwidth}
+                            \only<3->{
+                                \begin{table}
+                                    \center
+                                \begin{tabular}{| c | c | c |}
+                                    \hline X & X & X \\
+                                    \hline O & O & O \\
+                                    \hline   &   &   \\
+                                    \hline
+                                \end{tabular}
+                            \end{table}
+                            }
+                            \only<4->{
+                                \begin{table}
+                                    \center
+                                \begin{tabular}{| c | c | c |}
+                                    \hline   &   &   \\
+                                    \hline   &   & O \\
+                                    \hline X & X & O \\
+                                    \hline
+                                \end{tabular}
+                            \end{table}
+                            }
+                            \only<5->{
+                            \begin{table}
+                                \begin{tabular}{| c | c | c |}
+                                    \hline X & X & O \\
+                                    \hline   &   & O \\
+                                    \hline   &   &   \\
+                                    \hline
+                                \end{tabular}
+                            \end{table}
+                            }
+                            \only<6->{
+                            \begin{table}
+                                \begin{tabular}{| c | c | c |}
+                                    \hline O & X & X \\
+                                    \hline O &  &   \\
+                                    \hline   &   &   \\
+                                    \hline
+                                \end{tabular}
+                            \end{table}
+                            }
+                    \end{columns}
                 \end{frame}
                 \begin{frame}
                     \frametitle{Kółko i krzyżyk}
-                    \begin{figure}[H]
-                        \centering
-                        \includegraphics[width=0.55\textwidth,natwidth=480,natheight=480]{images/480px-Tictactoe-O.svg.png}
-                        \caption{Optymalna gra dla O}
-                    \end{figure}
+                    \begin{columns}
+                        \column{0.5\textwidth}
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=\textwidth,natwidth=480,natheight=480]{images/480px-Tictactoe-X.svg.png}
+                            \caption{Optymalna gra dla X}
+                        \end{figure}
+                        \column{0.5\textwidth}
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=\textwidth,natwidth=480,natheight=480]{images/480px-Tictactoe-O.svg.png}
+                            \caption{Optymalna gra dla O}
+                        \end{figure}
+                    \end{columns}
                 \end{frame}
             \subsubsection{Nim}
                 \begin{frame}
-                    \frametitle{Nim} 
+                    \frametitle{Nim}
+                    \begin{columns}
+                        \column{0.6\textwidth} 
                         \begin{itemize}
                             \item<1-> Matematyczna gra strategiczna
-                            \item<2-> Gracze na przemian zabiera \textit{pionki} z jednego z kilku stosów
+                            \item<2-> Gracze na przemian zabiera elementy z jednego z kilku stosów
                             \item<3-> W czasie ruchu gracz bierze dowolną niezerową liczbę pionków.
                             \item<4-> W jednym ruchu można zabierać pionki z tylko jednego stosu
                             \item<5-> W klasycznej wersji wygrywa gracz, który zabierze ostatniego pionka
-                        \end{itemize}               
-                \end{frame}
-                \begin{frame}
-                    \frametitle{Nim}
-                    \begin{figure}[H]
-                        \centering
-                        \includegraphics[width=0.6\textwidth]{images/nim_game}
-                        \caption{Przykładowa rozgrywka w nim}
-                    \end{figure}
+                        \end{itemize}
+                        \column{0.4\textwidth}
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=\textwidth]{images/nim_game}
+                            \caption{Przykładowa rozgrywka w nim}
+                        \end{figure}
+                    \end{columns}
                 \end{frame}
                 \begin{frame}
                     \frametitle{Nim - strategia}
                         \begin{itemize}
-                            \item<1->Kombinatoryczna teoria gier definiuje działanie tzw. \textit{nimsumy} $x \oplus y$
+                            \item<1->Kombinatoryczna teoria gier definiuje działanie tzw. \textit{nimsumy}: $x \oplus y$
                             \item<2-> Działanie jest także znane jako \textit{alternatywa wykluczająca}, czyli xor
                             \item<3-> $(a \oplus b) \oplus c = a \oplus (b \oplus c)$
                             \item<4-> $a \oplus b = b \oplus a$
@@ -131,59 +192,87 @@
                 \end{frame}
                 \begin{frame}
                     \frametitle{Nim - strategia}
-                    \begin{itemize}
-                        \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
-                        \item<2-> Niech $t = y_1 \oplus ... \oplus y_n$
-                        \item<3-> $t = 0 \oplus t $ 
-                        \item<4-> $t = (s \oplus s) \oplus t$
-                        \item<5-> $t = s \oplus (s \oplus t)$
-                        \item<6-> $t = s \oplus (x_1 \oplus ... \oplus x_n) \oplus (y_1 \oplus ... \oplus y_n)$
-                        \item<7-> $t = s \oplus (x_1 \oplus y_1) \oplus ... \oplus (x_n \oplus y_n) $
-                        \item<8-> $t = s \oplus 0 \oplus ... \oplus 0 \oplus (x_k \oplus y_n) \oplus 0 \oplus ... \oplus 0$
-                        \item<9-> $t = s \oplus x_k \oplus y_k$
-                        \item<10-> Następnie trzeba udowodnić dwa przypadki
-                    \end{itemize}
+                        \begin{itemize}
+                            \item<1-> $x_i$ - ilość elementów przed wykonaniem ruchu na $i$-tym stosie
+                            \item<2-> $y_i$ - ilość elementów po wykonaniu ruchu na $i$-tym stosie
+                            \item<3-> Niech $s = x_1 \oplus ... \oplus x_n$
+                            \item<4-> Niech $t = y_1 \oplus ... \oplus y_n$
+                            \item<5-> $t = 0 \oplus t $ 
+                            \item<6-> $t = (s \oplus s) \oplus t$
+                            \item<7-> $t = s \oplus (s \oplus t)$
+                            \item<8-> $t = s \oplus (x_1 \oplus ... \oplus x_n) \oplus (y_1 \oplus ... \oplus y_n)$
+                            \item<9-> $t = s \oplus (x_1 \oplus y_1) \oplus ... \oplus (x_n \oplus y_n) $
+                            \item<10-> $t = s \oplus 0 \oplus ... \oplus 0 \oplus (x_k \oplus y_n) \oplus 0 \oplus ... \oplus 0$
+                            \item<11-> $t = s \oplus x_k \oplus y_k$
+                        \end{itemize}
                 \end{frame}
                 \begin{frame}
                     \frametitle{Nim - strategia}
-                    \begin{itemize}
-                        \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
-                        \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
-                        \item<1-> $t = s \oplus x_k \oplus y_k$
-                        \item<2-> Jeżeli $s = 0,$ to $t \neq 0$, gracz wykonujący ruch przegrywa
-                        \item<3-> Jeżeli nie ma już możliwych ruchów, gra się kończyła i gracz już przegrał
-                        \item<4-> Każdy możliwy ruch sprawia, że $t = x_k \oplus y_k$
-                        \item<5-> $x_k \oplus y_k \neq 0$, ponieważ gracz musi pobrać niezerową liczbę elementów, więc $x_k \neq y_k$
-                    \end{itemize}
+                    \begin{columns}
+                        \column{0.6\textwidth}
+                            \begin{itemize}
+                                \item<1-> $x_i$ - ilość elementów przed wykonaniem ruchu na $i$-tym stosie
+                                \item<1-> $y_i$ - ilość elementów po wykonaniu ruchu na $i$-tym stosie
+                                \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
+                                \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
+                                \item<1-> $t = s \oplus x_k \oplus y_k$
+                                \item<2-> Jeżeli $s = 0,$ to $t \neq 0$, gracz wykonujący ruch przegrywa
+                                \item<3-> Jeżeli nie ma już możliwych ruchów, gra się kończyła i gracz już przegrał
+                                \item<4-> Każdy możliwy ruch sprawia, że $t = x_k \oplus y_k$
+                                \item<5-> $x_k \oplus y_k \neq 0$, ponieważ gracz musi pobrać niezerową liczbę elementów, więc $x_k \neq y_k$
+                            \end{itemize}
+                        \column{0.4\textwidth}
+                    \end{columns}
                 \end{frame}
                 \begin{frame}
                     \frametitle{Nim - strategia}
-                    \begin{itemize}
-                        \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
-                        \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
-                        \item<1-> $t = s \oplus x_k \oplus y_k$
-                        \item<2-> Jeżeli $s \neq 0,$ to możliwe jest wykonanie takiego ruchu, że $t = 0$, gracz wykonujący ruch wygrywa
-                        \item<3-> $t = 0 \oplus x_k \oplus y_k \pause = x_k \oplus y_k$
-                        \item<4-> Żeby $t = 0$, to $x_k \oplus y_k = 0 \pause \rightarrow x_k = y_k$ \pause
-                    \end{itemize}
-                    $\qed$
+                    \begin{columns}
+                        \column{0.6\textwidth}
+                            \begin{itemize}
+                                \item<1-> $x_i$ - ilość elementów przed wykonaniem ruchu na $i$-tym stosie
+                                \item<1-> $y_i$ - ilość elementów po wykonaniu ruchu na $i$-tym stosie
+                                \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
+                                \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
+                                \item<1-> $t = s \oplus x_k \oplus y_k$
+                                \item<2-> Jeżeli $s \neq 0,$ to możliwe jest wykonanie takiego ruchu, że $t = 0$, gracz wykonujący ruch wygrywa
+                                \item<4-> Żeby $t = 0$, to $y_k = s \oplus x_k$
+                                \item<5-> $t = s \oplus x_k \oplus (s \oplus x_k) \pause = 0 \pause \qed$
+                            \end{itemize}
+                    \column{0.4\textwidth}
+                \end{columns}
                     %obrazki ilustrujące stan gry
                 \end{frame}
-        \subsubsection{Zgadnij kto to?}
-            \begin{frame}
-                \frametitle{Zgadnij kto to?}
-            \end{frame}
+        %\subsubsection{Zgadnij kto to?}
+        %    \begin{frame}
+        %        \frametitle{Zgadnij kto to?}
+        %    \end{frame}
             \subsection{Słabe}
             \begin{frame}
                 \frametitle{Rozwiązania słabe}
                 \begin{itemize}
                     \item<1-> Jest znany algorytm, który pozwala jednemu z graczy utrzymać zwycięstwo lub remis od początku gry, niezależnie od ruchów przeciwnika
-                    \item<2-> Dzięki podanemu algorytmowi uzyskano przynajmniej jedną \textit{idealną grę} oraz podano dowód, że każdy ruch jest optymalny dla gracza, który go wykonuje                    
+                    \item<2-> Dzięki podanemu algorytmowi uzyskano przynajmniej jedną \textit{optymalną grę} oraz podano dowód, że każdy ruch jest optymalny dla gracza, który go wykonuje                    
                 \end{itemize}     
             \end{frame}
             \subsubsection{Warcaby}
                 \begin{frame}
                     \frametitle{Warcaby}
+                    \begin{columns}
+                        \column{0.6\textwidth}
+                        \begin{itemize}
+                            \item<1-> Chinook
+                            \item<2-> Biblioteka ruchów otwierających
+                            \item<3-> Biblioteka końcówek dla wszystkich pozycji z liczbą pionów mniejszą lub równą 8
+                            \item<4-> Ręcznie przygotowana funkcja oceny
+                            \item<5-> 19.07.2007 w magazynie \textit{Science} twórcy opublikowali swój dowód, że najlepsze co można osiągnąć grając przeciwko Chinook to remis
+                        \end{itemize}
+                        \column{0.4\textwidth}
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=0.55\textwidth]{images/checkers}
+                            \caption{Warcaby}
+                        \end{figure}
+                    \end{columns}
                 \end{frame}
             \subsubsection{Szachy Gardnera 5x5}
                 \begin{frame}
@@ -200,14 +289,48 @@
             \begin{frame}
                 \frametitle{Rozwiązania ultra słabe}
                 \begin{itemize}
-                    \item<1-> Udowodniono, że gracz wygrywa/przegrywa/remisuje ze startowej pozycji, jeżeli wszyscy grają optymalnie \textit{(ang. perfect play)}
+                    \item<1-> Udowodniono, że gracz wygrywa/przegrywa/remisuje ze startowej pozycji, jeżeli wszyscy grają optymalnie
                     \item<2-> Przeprowadzony dowód może być niekonstruktywny
                     \item<3-> \textbf{Nie jest wymagane określenie żadnego z ruchów idealnej gry}
                     % go,
                     %kradziez strategii
                 \end{itemize}
             \end{frame}
-            
+            \subsubsection{Hex}
+                \begin{frame}
+                    \frametitle{Hex}
+                    \begin{columns}
+                        \column{0.6\textwidth}
+                            \begin{itemize}
+                                \item<1-> Tradycyjnie rozgrywana na planszy 11x11 (w kształcie rombu)
+                                \item<2-> Gracze dysponują kamieniami o odmiennych kolorach
+                                \item<3-> Gracze układają kamienie na przemian na wolnych polach
+                                \item<4-> Wygrywa ten, który utworzy nieprzerwany ciąg łączący boki planszy własnego koloru
+                            \end{itemize}
+                        \column{0.4\textwidth}
+                        \begin{figure}[]
+                            \centering
+                            \includegraphics[width=\textwidth]{images/hex}
+                            \caption{Rozgrywka w hex}
+                        \end{figure}
+                    \end{columns}                    
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Hex - Dowód Johna Nasha}
+                    \begin{lmt}
+                        Dodatkowy lub losowy element Twojego koloru nie może Ci zaszkodzić
+                    \end{lmt} \pause
+                    \begin{lmt}
+                        Hex nie może zakończyć się remisem
+                    \end{lmt} \pause
+                    \begin{proof}
+                        Mamy dwóch graczy A i B, A zaczyna. Załóżmy, że B ma strategię wygrywającą. A może zagrać w losowe miejsce. Teraz A jest efektywnym drugim graczem i może grać strategią wygrywającą.
+                    \end{proof}
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Hex - Dowód Johna Nasha}
+                    Przedstawiony dowód polegający korzystający z kradzieży strategii, może być zastosowany do każdej symetrycznej gry, w której posiadanie dodatkowego elementu na planszy (lub dodatkowego ruchu) nie szkodzi danemu graczowi.
+                \end{frame} 
     \section{Szachy}
         \begin{frame}
             \frametitle{Szachy}
@@ -221,35 +344,114 @@
         \end{frame}
         \subsection{Problematyka}
             \begin{frame}
-               \frametitle{Problematyka} 
+               \frametitle{Problematyka}
+               \begin{itemize}
+                    \item $10^{120}$ możliwych wariantów
+               \end{itemize}
             \end{frame}
         \subsection{Minimax}
             \begin{frame}
-                \begin{algorithm}[H]
-                    \KwIn{test}
-                    \KwOut{test}
-                \caption{TEST}
-                \end{algorithm}
+                \frametitle{Minimiax}
+                \begin{figure}[]
+                    \centering
+                    \includegraphics[width=\textwidth]{images/minimax}
+                    \caption{Przykładowy minimax}
+                \end{figure}
+            \end{frame}
+            \begin{frame}
+                \frametitle{Minimax}
+                \begin{figure}[]
+                    \centering
+                    \includegraphics[width=\textwidth]{images/minimax_code}
+                    \caption{Pseudokod}
+                \end{figure}
             \end{frame}
         \subsection{Heurystyki}
             \begin{frame}
-                \frametitle{Heurystyki}                
+                \frametitle{Heurystyki}
+                \begin{mdfn}
+                    Heurystyka to metoda znajdowania rozwiązań, dla której nie ma gwarancji znalezienia rozwiązania optymalnego, a często nawet prawidłowego. Rozwiązań tych używa się np. wtedy, gdy pełny algorytm jest z przyczyn technicznych zbyt kosztowny lub gdy jest nieznany.
+                \end{mdfn}               
             \end{frame}
             \subsubsection{Negamax}
                 \begin{frame}
                     \frametitle{Negamax}
                     %https://en.wikipedia.org/wiki/Negamax
+                    \begin{itemize}
+                        \item<1-> Pewne uproszczenie klasycznego minimaxa
+                        \item<2-> Wykorzystuje własności gier o zerowej sumie
+                        \item<3-> max$(a,b) = -$min$(-a,-b)$
+                    \end{itemize}
+                    \only<4->{
+                    \begin{figure}[]
+                        \centering
+                        \includegraphics[width=\textwidth]{images/negamax_code}
+                        \caption{Pseudokod}
+                    \end{figure}
+                    }
                 \end{frame}
+            
+                \subsubsection{Funkcja oceniająca}
+                \begin{frame}
+                    \frametitle{Funkcja oceniająca}
+                    %https://en.wikipedia.org/wiki/Evaluation_function
+                    \begin{itemize}
+                        \item<1-> Ocena stanu węzła w drzewie gry
+                        \item<2-> Ogólne podejście: kombinacja liniowa ważonych czynników
+                        \item<3-> Nie ma analitycznego ani teoretycznego modelu dla nierozwiązanych
+                        \item<4-> Decyduje podejście empiryczne
+                        \item<5-> Przykładowa funkcja dla szachów:
+                    \end{itemize}
+                    $f(x) = c_1 \cdot$ wartość figur \pause $+ c_2 \cdot$ bezpieczeństwo króla \pause $+ c_3 \cdot$ kontrola \pause $+ ...$ \pause
+                    Współczynniki $c_i$ są pewnymi wagami i mogą się zmieniać zależnie od fazy gry.
+                \end{frame}
+
             \subsubsection{Alfa-Beta Pruning}
                 \begin{frame}
                     \frametitle{Alfa-Beta Pruning}
                     %https://en.wikipedia.org/wiki/Alpha–beta_pruning
+                    \begin{columns}
+                        \column{0.5\textwidth}
+                        \begin{figure}[]
+                            \centering
+                            \includegraphics[width=\textwidth]{images/ab}
+                            \caption{Działanie algorytmu}
+                        \end{figure}
+                        \column{0.5\textwidth}
+                        \begin{figure}[]
+                            \centering
+                            \includegraphics[width=0.8\textwidth]{images/ab_code}
+                            \caption{Pseudokod}
+                        \end{figure}
+                    \end{columns}
                 \end{frame}
-            \subsubsection{Funkcja oceniająca}
+            
+            \subsubsection{Monte Carlo tree search}
                 \begin{frame}
-                    \frametitle{Funkcja oceniająca}
-                    %https://en.wikipedia.org/wiki/Evaluation_function
+                    \frametitle{Monte Carlo tree search}
+                    %https://en.wikipedia.org/wiki/Monte_Carlo_tree_search
+                    \begin{itemize}
+                        \item<1-> 4 etapy
+                        \item<2-> Selekcja
+                        \item<3-> Ekspansja
+                        \item<4-> Symulacja
+                        \item<5-> Propagacja wsteczna                         
+                    \end{itemize}
+                    \only<6->{
+                    \begin{figure}[]
+                        \centering
+                        \includegraphics[width=0.9\textwidth]{images/mcts}
+                        \caption{Monte cCarlo tree search}
+                    \end{figure}
+                    }
                 \end{frame}
+            \subsection{Null move}
+            \begin{frame}
+                \frametitle{Null move}
+                %https://en.wikipedia.org/wiki/Killer_heuristic
+                %na koniec
+                %heurystyka ruchu zerowego null move, jako przyklad tylko
+            \end{frame}
             \subsubsection{Killer heuristic}
                 \begin{frame}
                     \frametitle{Killer heuristic}
@@ -257,15 +459,12 @@
                     %na koniec
                     %heurystyka ruchu zerowego null move, jako przyklad tylko
                 \end{frame}
-            \subsubsection{Monte Carlo tree search}
-                \begin{frame}
-                    \frametitle{Monte Carlo tree search}
-                    %https://en.wikipedia.org/wiki/Monte_Carlo_tree_search
-                \end{frame}
+            
     \section{Literatura}
         \begin{frame}
             \frametitle{Literatura}
             \begin{thebibliography}{9}
+                \bibitem{tictactoe}Anurag Bhatt, Pratul Varshney, Kalyanmoy Deb, Indian Institute of Technology Kanpur, \emph{Evolution of No-loss Strategies for the Game of Tic-Tac-Toe}, \url{https://www.iitk.ac.in/kangal/papers/k2007002.pdf} (data dostępu: 28.10.2019)
                 \bibitem{course_gt}Martin J. Osborne, Ariel Rubinstein, The MIT Press, \emph{A course in Game Theory}, 1994
                 \bibitem{ai_history}Andrey Kurenkov, \emph{A 'Brief' History of Game AI Up To AlphaGo}, \url{https://www.andreykurenkov.com/writing/ai/a-brief-history-of-game-ai/} (data dostępu: 26.10.2019)
                 \bibitem{wiki_solved_game}Wikipedia, \emph{Solved game}, \url{https://en.wikipedia.org/wiki/Solved_game} (data dostępu: 26.10.2019)
