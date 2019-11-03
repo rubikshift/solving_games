@@ -12,6 +12,7 @@
     \usepackage{algorithm2e}
 
     \newtheorem{mdfn}{Definicja}
+    \newtheorem{twrdz}{Twierdzenie}
     \newtheorem{lmt}{Lemat}
 
 
@@ -20,7 +21,7 @@
     \title{Rozwiązywanie gier}
     \author{Michał Krakowiak}
     \subtitle{Wybrane problemy algorytmiczne i technologiczne, seminarium}
-    \date{Gdańsk, 29.10.2019}
+    \date{Gdańsk, 05.11.2019}
 
 \begin{document}
     \frame{\titlepage}
@@ -35,10 +36,20 @@
         \subsection{Tło historyczne}
             \begin{frame}
                 \frametitle{Tło historyczne}
-                \begin{itemize}
-                    \item<1-> 1949, Claude Shannon, komputer a szachy
-                    \item<2-> hmmm
-                \end{itemize}
+                \begin{columns}
+                    \column{0.5\textwidth}
+                        \begin{figure}[H]
+                            \centering
+                                \includegraphics[width=0.7\textwidth]{images/nash.jpg}
+                            \caption{John Nash}
+                        \end{figure}
+                    \column{0.5\textwidth}
+                    \begin{figure}[H]
+                        \centering
+                            \includegraphics[width=0.7\textwidth]{images/shannon.jpg}
+                        \caption{Claude Shannon}
+                    \end{figure}
+                \end{columns}
             \end{frame}
         \subsection{Definicja gry}
             \begin{frame}
@@ -186,9 +197,9 @@
                 \end{frame}
                 \begin{frame}
                     \frametitle{Nim - strategia}
-                        \begin{mdfn}
-                            Gracz rozpoczynający ma wygrywającą strategię wtedy i tylko wtedy gdy nimsuma rozmiarów stosów jest niezerowa. W przeciwnym razie drugi gracz posiada strategię wygrywającą.
-                        \end{mdfn} 
+                        \begin{twrdz}
+                            Gracz rozpoczynający ma wygrywającą strategię wtedy i tylko wtedy, gdy nimsuma rozmiarów stosów jest niezerowa. W przeciwnym razie drugi gracz posiada strategię wygrywającą.
+                        \end{twrdz} 
                 \end{frame}
                 \begin{frame}
                     \frametitle{Nim - strategia}
@@ -216,10 +227,10 @@
                                 \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
                                 \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
                                 \item<1-> $t = s \oplus x_k \oplus y_k$
-                                \item<2-> Jeżeli $s = 0,$ to $t \neq 0$, gracz wykonujący ruch przegrywa
+                                \item<2-> Jeżeli $s = 0,$ gracz wykonujący ruch przegrywa
                                 \item<3-> Jeżeli nie ma już możliwych ruchów, gra się kończyła i gracz już przegrał
-                                \item<4-> Każdy możliwy ruch sprawia, że $t = x_k \oplus y_k$
-                                \item<5-> $x_k \oplus y_k \neq 0$, ponieważ gracz musi pobrać niezerową liczbę elementów, więc $x_k \neq y_k$
+                                \item<4-> Każdy możliwy ruch sprawia, że $t = x_k \oplus y_k \neq 0$
+                                \item<5-> $x_k \oplus y_k \neq 0$, ponieważ gracz musi pobrać niezerową liczbę elementów
                             \end{itemize}
                         \column{0.4\textwidth}
                     \end{columns}
@@ -235,8 +246,8 @@
                                 \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
                                 \item<1-> $t = s \oplus x_k \oplus y_k$
                                 \item<2-> Jeżeli $s \neq 0,$ to możliwe jest wykonanie takiego ruchu, że $t = 0$, gracz wykonujący ruch wygrywa
-                                \item<4-> Żeby $t = 0$, to $y_k = s \oplus x_k$
-                                \item<5-> $t = s \oplus x_k \oplus (s \oplus x_k) \pause = 0 \pause \qed$
+                                \item<3-> Żeby $t = 0$, to $y_k = s \oplus x_k$
+                                \item<4-> $t = s \oplus x_k \oplus (s \oplus x_k) \pause = 0 \pause \qed$
                             \end{itemize}
                     \column{0.4\textwidth}
                 \end{columns}
@@ -261,15 +272,15 @@
                         \column{0.6\textwidth}
                         \begin{itemize}
                             \item<1-> Chinook
-                            \item<2-> Biblioteka ruchów otwierających
-                            \item<3-> Biblioteka końcówek dla wszystkich pozycji z liczbą pionów mniejszą lub równą 8
-                            \item<4-> Ręcznie przygotowana funkcja oceny
-                            \item<5-> 19.07.2007 w magazynie \textit{Science} twórcy opublikowali swój dowód, że najlepsze co można osiągnąć grając przeciwko Chinook to remis
+                            \item<2-> 19.07.2007 w magazynie \textit{Science} twórcy opublikowali swój dowód, że najlepsze co można osiągnąć grając przeciwko Chinook to remis
+                            \item<3-> Biblioteka ruchów otwierających
+                            \item<4-> Biblioteka końcówek dla wszystkich pozycji z liczbą pionków mniejszą lub równą 8
+                            \item<5-> Ręcznie przygotowana funkcja oceny
                         \end{itemize}
                         \column{0.4\textwidth}
                         \begin{figure}[H]
                             \centering
-                            \includegraphics[width=0.55\textwidth]{images/checkers}
+                            \includegraphics[width=\textwidth]{images/checkers}
                             \caption{Warcaby}
                         \end{figure}
                     \end{columns}
@@ -278,11 +289,19 @@
                 \begin{frame}
                     \frametitle{Szachy Gardnera 5x5}
                     % https://chess.stackexchange.com/questions/24042/studying-why-gardners-minichess-variant-is-solved
-                    \begin{figure}[H]
-                        \centering
-                        \includegraphics[width=0.55\textwidth]{images/gardner.png}
-                        \caption{Startowe ułożenie w szachach gardnera 5x5}
-                    \end{figure}
+                    \begin{columns}
+                        \column{0.6\textwidth}
+                        \begin{itemize}
+                            \item Udowodniono remis, przy optymalnej grze obu graczy \cite{minichess}
+                            \item 
+                        \end{itemize}
+                        \column{0.4\textwidth}
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=\textwidth]{images/gardner.png}
+                                \caption{Startowe ułożenie w szachach gardnera 5x5}
+                            \end{figure}    
+                    \end{columns}
                 \end{frame}
 
         \subsection{Ultra słabe}
@@ -308,7 +327,7 @@
                                 \item<4-> Wygrywa ten, który utworzy nieprzerwany ciąg łączący boki planszy własnego koloru
                             \end{itemize}
                         \column{0.4\textwidth}
-                        \begin{figure}[]
+                        \begin{figure}[H]
                             \centering
                             \includegraphics[width=\textwidth]{images/hex}
                             \caption{Rozgrywka w hex}
@@ -324,35 +343,60 @@
                         Hex nie może zakończyć się remisem
                     \end{lmt} \pause
                     \begin{proof}
-                        Mamy dwóch graczy A i B, A zaczyna. Załóżmy, że B ma strategię wygrywającą. A może zagrać w losowe miejsce. Teraz A jest efektywnym drugim graczem i może grać strategią wygrywającą.
+                        Mamy dwóch graczy A i B, A zaczyna. Załóżmy, że B ma strategię wygrywającą. A może zagrać w losowe miejsce. Teraz A jest efektywnym drugim graczem i może grać strategią wygrywającą \cite{hex_proof}.
                     \end{proof}
                 \end{frame}
                 \begin{frame}
                     \frametitle{Hex - Dowód Johna Nasha}
                     Przedstawiony dowód polegający korzystający z kradzieży strategii, może być zastosowany do każdej symetrycznej gry, w której posiadanie dodatkowego elementu na planszy (lub dodatkowego ruchu) nie szkodzi danemu graczowi.
                 \end{frame} 
+            \subsubsection{Go}
+                \begin{frame}
+                    \frametitle{Go}
+                    \begin{columns}
+                        \column{0.6\textwidth}
+                            \begin{itemize}
+                                \item<1-> Tylko wersja gry bez komi
+                                \item<2-> Komi to wyrównanie punktowe dla drugiego gracza
+                                \item<3-> Dowód korzysta z kradzieży strategii
+                                \item<4-> W Go można pasować
+                                \item<5-> Jeżeli białe mają strategię wygrywającą, czarne może ją ukraść pasując
+                                \item<6-> W rezultacie czarne mogą wygrać lub zremisować przy optymalnej grze
+                            \end{itemize}
+                        \column{0.4\textwidth}
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=\textwidth]{images/496px-FloorGoban.jpg}
+                                \caption{Goban}
+                            \end{figure} 
+                    \end{columns}                    
+                \end{frame}
+            
     \section{Szachy}
         \begin{frame}
             \frametitle{Szachy}
-            \begin{figure}[]
+            \begin{columns}
+            \column{0.6\textwidth}                
+            \begin{itemize}
+                \item<1-> $10^{120}$ możliwych wariantów
+                \item<2-> Rozwiązane częściowo
+                \item<3-> Znane są rozwiązania mocne dla wszystkich końcówek liczących od 3 do 7 bierek (wliczając obu króli)
+                \item<4-> Osiągnięto to dzięki bazie danych końcówek i analizie retrograde
+           \end{itemize}
+            \column{0.4\textwidth}                
+            \begin{figure}[H]
                 \centering
-                \includegraphics[width=0.55\textwidth]{images/chess.png}
+                \includegraphics[width=\textwidth]{images/chess.png}
                 \caption{Szachy klasyczne}
             \end{figure}
             %podzial na otwarcie, gra srodkowa, koncowki
             %retro grade
+        \end{columns}
         \end{frame}
-        \subsection{Problematyka}
-            \begin{frame}
-               \frametitle{Problematyka}
-               \begin{itemize}
-                    \item $10^{120}$ możliwych wariantów
-               \end{itemize}
-            \end{frame}
         \subsection{Minimax}
             \begin{frame}
                 \frametitle{Minimiax}
-                \begin{figure}[]
+                \begin{figure}[H]
                     \centering
                     \includegraphics[width=\textwidth]{images/minimax}
                     \caption{Przykładowy minimax}
@@ -360,11 +404,38 @@
             \end{frame}
             \begin{frame}
                 \frametitle{Minimax}
-                \begin{figure}[]
-                    \centering
-                    \includegraphics[width=\textwidth]{images/minimax_code}
-                    \caption{Pseudokod}
-                \end{figure}
+                \scalebox{0.85}{
+                            \begin{minipage}{1.1\linewidth}
+                \begin{algorithm}[H]
+                    \SetAlgoLined
+                    \DontPrintSemicolon
+                    \SetKwFunction{FMain}{minimax}
+                    \SetKwProg{Fn}{Function}{:}{end}
+                    \Fn{\FMain{node, depth, maximizingPlayer}}{
+                        \If{depth $=0$ or node is a terminal node}
+                        {
+                            \KwRet heuristic value of node\;
+                        }
+                        \eIf{maximizingPlayer}
+                        {
+                            value $\gets -\infty$\;
+                            \ForEach{child in node}{
+                                value $\gets$ max(value, minimax(child, depth $- 1$, False))\;
+                            }
+                            \KwRet value\;
+                        }
+                        {
+                            value $\gets \infty$\;
+                            \ForEach{child in node}{
+                                value $\gets$ min(value, minimax(child, depth $- 1$, True))\;
+                            }
+                            \KwRet value\;
+                        }
+                    }
+                    \;
+                \end{algorithm}
+            \end{minipage}
+                }
             \end{frame}
         \subsection{Heurystyki}
             \begin{frame}
@@ -378,16 +449,32 @@
                     \frametitle{Negamax}
                     %https://en.wikipedia.org/wiki/Negamax
                     \begin{itemize}
-                        \item<1-> Pewne uproszczenie klasycznego minimaxa
-                        \item<2-> Wykorzystuje własności gier o zerowej sumie
-                        \item<3-> max$(a,b) = -$min$(-a,-b)$
+                        \item Pewne uproszczenie klasycznego minimaxa \pause
+                        \item Wykorzystuje własność gier o zerowej sumie \pause
+                        \item max$(a,b) = -$min$(-a,-b)$ \pause
                     \end{itemize}
-                    \only<4->{
-                    \begin{figure}[]
-                        \centering
-                        \includegraphics[width=\textwidth]{images/negamax_code}
-                        \caption{Pseudokod}
-                    \end{figure}
+                    \scalebox{0.85}{
+                            \begin{minipage}{1.1\linewidth}
+                        \begin{algorithm}[H]
+                            \SetAlgoLined
+                            \DontPrintSemicolon
+                            \SetKwFunction{FMain}{negamax}
+                            \SetKwProg{Fn}{Function}{:}{end}
+                            \Fn{\FMain{node, depth, color}}{
+                                \If{depth $=0$ or node is a terminal node}
+                                {
+                                    \KwRet color $\cdot$ heuristic value of node\;
+                                }
+                                value $\gets -\infty$\;
+
+                                \ForEach{child in node}{
+                                    value $\gets$ max(value, minimax(child, depth $- 1$, $-$color))\;
+                                }
+                                \KwRet value\;
+                            }
+                            \;
+                        \end{algorithm}
+                    \end{minipage}
                     }
                 \end{frame}
             
@@ -396,34 +483,75 @@
                     \frametitle{Funkcja oceniająca}
                     %https://en.wikipedia.org/wiki/Evaluation_function
                     \begin{itemize}
-                        \item<1-> Ocena stanu węzła w drzewie gry
-                        \item<2-> Ogólne podejście: kombinacja liniowa ważonych czynników
-                        \item<3-> Nie ma analitycznego ani teoretycznego modelu dla nierozwiązanych
-                        \item<4-> Decyduje podejście empiryczne
-                        \item<5-> Przykładowa funkcja dla szachów:
+                        \item Ocena stanu węzła w drzewie gry \pause
+                        \item Ogólne podejście: kombinacja liniowa ważonych czynników \pause
+                        \item Nie ma analitycznego ani teoretycznego modelu dla nierozwiązanych gier\pause
+                        \item Decyduje podejście empiryczne \pause
+                        \item Przykładowa funkcja dla szachów: \pause
                     \end{itemize}
                     $f(x) = c_1 \cdot$ wartość figur \pause $+ c_2 \cdot$ bezpieczeństwo króla \pause $+ c_3 \cdot$ kontrola \pause $+ ...$ \pause
                     Współczynniki $c_i$ są pewnymi wagami i mogą się zmieniać zależnie od fazy gry.
                 \end{frame}
 
             \subsubsection{Alfa-Beta Pruning}
+            \begin{frame}
+                \frametitle{Alfa-Beta Pruning}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=\textwidth]{images/ab}
+                \end{figure}
+            \end{frame}
                 \begin{frame}
                     \frametitle{Alfa-Beta Pruning}
                     %https://en.wikipedia.org/wiki/Alpha–beta_pruning
-                    \begin{columns}
-                        \column{0.5\textwidth}
-                        \begin{figure}[]
-                            \centering
-                            \includegraphics[width=\textwidth]{images/ab}
-                            \caption{Działanie algorytmu}
-                        \end{figure}
-                        \column{0.5\textwidth}
-                        \begin{figure}[]
-                            \centering
-                            \includegraphics[width=0.8\textwidth]{images/ab_code}
-                            \caption{Pseudokod}
-                        \end{figure}
-                    \end{columns}
+                    %\begin{columns}
+                    %    \column{0.4\textwidth}
+                    %    \begin{figure}[H]
+                    %        \centering
+                    %        \includegraphics[width=\textwidth]{images/ab}
+                    %        \caption{Działanie algorytmu}
+                    %    \end{figure}
+                    %    \column{0.6\textwidth}
+                        \scalebox{0.7}{
+                            \begin{minipage}{1.1\linewidth}
+                        \begin{algorithm}[H]
+                            \SetAlgoLined
+                            \DontPrintSemicolon
+                            \SetKwFunction{FMain}{alphabeta}
+                            \SetKwProg{Fn}{Function}{:}{end}
+                            \Fn{\FMain{node, depth, $\alpha$, $\beta$, maximizingPlayer}}{
+                                \If{depth $=0$ or node is a terminal node}
+                                {
+                                    \KwRet heuristic value of node\;
+                                }
+                                \eIf{maximizingPlayer}
+                                {
+                                    value $\gets -\infty$\;
+                                    \ForEach{child in node}{
+                                    value $\gets$ max(value, alphabeta(child, depth $- 1$, $\alpha$, $\beta$, False))\;
+                                    $\alpha \gets$ max($\alpha$, value)\;
+                                    \lIf{$\alpha \geq \beta$}{break\;}
+                                    }
+                                    \KwRet value\;
+
+
+                                }
+                                {
+                                    value $\gets +\infty$\;
+                                    \ForEach{child in node}{
+                                    value $\gets$ min(value, alphabeta(child, depth $- 1$, $\alpha$, $\beta$, True))\;
+                                    $\beta \gets$ min($\beta$, value)\;
+                                    \lIf{$\alpha \geq \beta$}{break\;}
+                                    }
+                                    \KwRet value\;
+
+                                }
+                            }
+                            \;
+                        \end{algorithm}
+                    \end{minipage}
+                    }
+                    %\end{columns}
                 \end{frame}
             
             \subsubsection{Monte Carlo tree search}
@@ -431,30 +559,41 @@
                     \frametitle{Monte Carlo tree search}
                     %https://en.wikipedia.org/wiki/Monte_Carlo_tree_search
                     \begin{itemize}
-                        \item<1-> 4 etapy
-                        \item<2-> Selekcja
-                        \item<3-> Ekspansja
-                        \item<4-> Symulacja
-                        \item<5-> Propagacja wsteczna                         
+                        \item<1-> Selekcja
+                        \item<2-> Ekspansja 
+                        \item<3-> Symulacja 
+                        \item<4-> Propagacja wsteczna                         
                     \end{itemize}
-                    \only<6->{
-                    \begin{figure}[]
+                    
+                    \begin{figure}[H]
                         \centering
                         \includegraphics[width=0.9\textwidth]{images/mcts}
-                        \caption{Monte cCarlo tree search}
+                        \caption{Monte Carlo tree search}
                     \end{figure}
-                    }
+                    
                 \end{frame}
-            \subsection{Null move}
+            \subsubsection{Null move}
             \begin{frame}
                 \frametitle{Null move}
                 %https://en.wikipedia.org/wiki/Killer_heuristic
+                \begin{itemize}
+                    \item<1-> Ruch zerowy, czyli np. pasowanie
+                    \item<2-> W szachach jest niedozwolony
+                    \item<3-> Każdy gracz chce polepszyć swoją sytuację
+                    \item<4-> Jednak wprowadzając analizę ruchu zerowego, można szybciej uzyskać odcięcie
+                \end{itemize}
                 %na koniec
                 %heurystyka ruchu zerowego null move, jako przyklad tylko
             \end{frame}
             \subsubsection{Killer heuristic}
                 \begin{frame}
                     \frametitle{Killer heuristic}
+                    \begin{itemize}
+                        \item<1-> Autorka: Barbara Liskov
+                        \item<2-> Tylko niewielka liczba ruchów diametralnie zmienia sytuację
+                        \item<3-> Założenie: jeżeli ruch tworzy odcięcie \textit{zabójczy ruch}, to prawdopodobnie wytworzy je też w podobnej sytuacji
+                        \item<4-> Aby przyśpieszyć odcięcie algorytm rozpoczyna szukanie od zapisanych \textit{zabójczych ruchów}
+                    \end{itemize}
                     %https://en.wikipedia.org/wiki/Killer_heuristic
                     %na koniec
                     %heurystyka ruchu zerowego null move, jako przyklad tylko
@@ -463,12 +602,17 @@
     \section{Literatura}
         \begin{frame}
             \frametitle{Literatura}
+            \scalebox{0.7}{
+                            \begin{minipage}{1.3\linewidth}
             \begin{thebibliography}{9}
                 \bibitem{tictactoe}Anurag Bhatt, Pratul Varshney, Kalyanmoy Deb, Indian Institute of Technology Kanpur, \emph{Evolution of No-loss Strategies for the Game of Tic-Tac-Toe}, \url{https://www.iitk.ac.in/kangal/papers/k2007002.pdf} (data dostępu: 28.10.2019)
                 \bibitem{course_gt}Martin J. Osborne, Ariel Rubinstein, The MIT Press, \emph{A course in Game Theory}, 1994
                 \bibitem{ai_history}Andrey Kurenkov, \emph{A 'Brief' History of Game AI Up To AlphaGo}, \url{https://www.andreykurenkov.com/writing/ai/a-brief-history-of-game-ai/} (data dostępu: 26.10.2019)
                 \bibitem{wiki_solved_game}Wikipedia, \emph{Solved game}, \url{https://en.wikipedia.org/wiki/Solved_game} (data dostępu: 26.10.2019)
-                \bibitem{minichess}Mehdi Mhalla, Fr\'ed\'eric Prost, \emph{Gardner’s Minichess Variant is solved}, \url{https://arxiv.org/pdf/1307.7118.pdf} (data dostępu: 27.10.219)
+                \bibitem{minichess}Mehdi Mhalla, Fr\'ed\'eric Prost, \emph{Gardner’s Minichess Variant is solved}, \url{https://arxiv.org/pdf/1307.7118.pdf} (data dostępu: 27.10.2019)
+                \bibitem{hex_proof} \emph{Hex}, SP.269, Spring 2011 \url{http://web.mit.edu/sp.268/www/hex-notes.pdf} (data dostępu 03.11.2019)
             \end{thebibliography}
+        \end{minipage}
+            }
         \end{frame}
 \end{document}
