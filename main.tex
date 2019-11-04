@@ -10,6 +10,7 @@
     \usepackage{graphicx}
     \usepackage{outlines}
     \usepackage{algorithm2e}
+    \usepackage{tikz}
 
     \newtheorem{mdfn}{Definicja}
     \newtheorem{twrdz}{Twierdzenie}
@@ -22,7 +23,7 @@
     \author{Michał Krakowiak}
     \subtitle{Wybrane problemy algorytmiczne i technologiczne, seminarium}
     \date{Gdańsk, 05.11.2019}
-
+    
 \begin{document}
     \frame{\titlepage}
     \section{Wstęp}
@@ -85,7 +86,7 @@
             \begin{frame}
                 \frametitle{Rozwiązania mocne}
                 \begin{itemize}
-                    \item<1-> Jest znany algorytm pozwalający uzyskać najlepsze ruchy z każdej pozycji (nawet jeżeli, któryś z graczy popełnił błąd)
+                    \item<1-> Jest znany algorytm pozwalający uzyskać optymalne ruchy z każdej pozycji (nawet jeżeli, któryś z graczy popełnił błąd)
                     \item<2-> Częste wykorzystanie metod siłowych
                     \item<3-> Dowód może nie być pomocny w zrozumieniu powodów dlaczego dana gra jest rozwiązywalna
                 \end{itemize}
@@ -240,6 +241,10 @@
                                 \item<5-> $x_k \oplus y_k \neq 0$, ponieważ gracz musi pobrać niezerową liczbę elementów
                             \end{itemize}
                         \column{0.4\textwidth}
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=\textwidth]{images/nimsuma0.jpg}                            
+                        \end{figure}
                     \end{columns}
                 \end{frame}
                 \begin{frame}
@@ -254,11 +259,15 @@
                                 \item<1-> $t = s \oplus x_k \oplus y_k$
                                 \item<2-> Jeżeli $s \neq 0,$ to możliwe jest wykonanie takiego ruchu, że $t = 0$, gracz wykonujący ruch wygrywa
                                 \item<3-> Żeby $t = 0$, to $y_k = s \oplus x_k$
-                                \item<4-> $t = s \oplus x_k \oplus (s \oplus x_k) \pause = 0$
+                                \item<4-> $t = s \oplus x_k \oplus (s \oplus x_k) = 0$
                             \end{itemize}
                     \column{0.4\textwidth}
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=\textwidth]{images/nimsuma1.jpg}                            
+                        \end{figure}
                 \end{columns}
-                    %obrazki ilustrujące stan gry
+                 
                 \end{frame}
                 \begin{frame}
                     \frametitle{Nim - strategia}
@@ -267,7 +276,7 @@
                         \item<1-> $y_i$ - ilość elementów po wykonaniu ruchu na $i$-tym stosie
                         \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
                         \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
-                        \item<2-> Strategia wygrywająca polega na zdejmowaniu elementów taki sposób, aby zaszło $t = 0$
+                        \item<2-> Strategia wygrywająca polega na zdejmowaniu elementów w taki sposób, aby zaszło $t = 0$
                         \item<3-> Taki ruch jest możliwy wtedy i tylko wtedy, gdy $s \neq 0$ \pause $\qed$
                     \end{itemize}
                 \end{frame}
@@ -291,8 +300,9 @@
                         \begin{itemize}
                             \item<1-> Chinook - program komputerowy rozwijany w latach 1989 - 2007
                             \item<2-> 19.07.2007 w magazynie \textit{Science} twórcy opublikowali swój dowód, że w przypadku, gdy żaden z graczy nie popełni błędu partia kończy się remisem
-                            \item<3-> Baza danych końcówek o liczbie pionów $\leq 10$
-                            \item<4-> 
+                            \item<3-> Baza danych końcówek o liczbie pionów $\leq 10$, \textbf{237 GB}
+                            \item<4-> Baza danych przechowuje wynik gry dla danej pozycji, jest wykorzystywana do analizy wstecz (retrograde)
+                            \item<4-> Drugi komponent: algorytm przeszukiwania wprzód (alphabeta)
                         \end{itemize}
                         \column{0.4\textwidth}
                         \begin{figure}[H]
@@ -310,7 +320,6 @@
                         \column{0.6\textwidth}
                         \begin{itemize}
                             \item Udowodniono remis, przy optymalnej grze obu graczy \cite{minichess}
-                            \item 
                         \end{itemize}
                         \column{0.4\textwidth}
                             \begin{figure}[H]
@@ -319,6 +328,15 @@
                                 \caption{Startowe ułożenie w szachach gardnera 5x5}
                             \end{figure}    
                     \end{columns}
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Szachy Gardnera 5x5}
+                    % https://chess.stackexchange.com/questions/24042/studying-why-gardners-minichess-variant-is-solved
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=0.8\textwidth]{images/gardner_proof}
+                                \caption{Fragment rozwiązania szachów 5x5}
+                            \end{figure}    
                 \end{frame}
 
         \subsection{Ultra słabe}
@@ -353,6 +371,9 @@
                 \end{frame}
                 \begin{frame}
                     \frametitle{Hex - Dowód Johna Nasha}
+                    \begin{twrdz}
+                        Pierwszy gracz ma strategię wygrywającą
+                    \end{twrdz}
                     \begin{lmt}
                         Dodatkowy lub losowy element Twojego koloru nie może Ci zaszkodzić
                     \end{lmt} \pause
@@ -365,7 +386,7 @@
                 \end{frame}
                 \begin{frame}
                     \frametitle{Hex - Dowód Johna Nasha}
-                    Przedstawiony dowód polegający korzystający z kradzieży strategii, może być zastosowany do każdej symetrycznej gry, w której posiadanie dodatkowego elementu na planszy (lub dodatkowego ruchu) nie szkodzi danemu graczowi.
+                    Przedstawiony dowód korzystający z kradzieży strategii, może być zastosowany do każdej symetrycznej gry, w której posiadanie dodatkowego elementu na planszy (lub dodatkowego ruchu) nie szkodzi danemu graczowi.
                 \end{frame} 
             \subsubsection{Go}
                 \begin{frame}
@@ -377,7 +398,7 @@
                                 \item<2-> Komi to wyrównanie punktowe dla drugiego gracza
                                 \item<3-> Dowód korzysta z kradzieży strategii
                                 \item<4-> W Go można pasować
-                                \item<5-> Jeżeli białe mają strategię wygrywającą, czarne może ją ukraść pasując już na początku gry
+                                \item<5-> Jeżeli białe mają strategię wygrywającą, czarne mogą ją ukraść pasując już na początku gry
                                 \item<6-> W rezultacie czarne mogą wygrać lub zremisować przy optymalnej grze
                             \end{itemize}
                         \column{0.4\textwidth}
@@ -576,10 +597,10 @@
                     \frametitle{Monte Carlo tree search}
                     %https://en.wikipedia.org/wiki/Monte_Carlo_tree_search
                     \begin{itemize}
-                        \item<1-> Selekcja
-                        \item<2-> Ekspansja 
-                        \item<3-> Symulacja 
-                        \item<4-> Propagacja wsteczna                         
+                        \item<1-> Selekcja - Wybór liścia w drzewie gry
+                        \item<2-> Ekspansja - Utworzenie węzła potomnego - jeżeli liść nie kończy gry
+                        \item<3-> Symulacja - rozegranie losowej gry z wybranego węzła
+                        \item<4-> Propagacja wsteczna - aktualizacja informacji w węzłach na podstawie wyniku rozegranej gry                         
                     \end{itemize}
                     
                     \begin{figure}[H]
@@ -596,7 +617,7 @@
                 \begin{itemize}
                     \item<1-> Ruch zerowy, czyli np. pasowanie
                     \item<2-> W szachach jest niedozwolony
-                    \item<3-> Każdy gracz chce polepszyć swoją sytuację
+                    \item<3-> Założenie: każdy gracz chce polepszyć swoją sytuację
                     \item<4-> Jednak wprowadzając analizę ruchu zerowego, można szybciej uzyskać odcięcie
                 \end{itemize}
                 %na koniec
@@ -608,7 +629,7 @@
                     \begin{itemize}
                         \item<1-> Autorka: Barbara Liskov
                         \item<2-> Tylko niewielka liczba ruchów diametralnie zmienia sytuację
-                        \item<3-> Założenie: jeżeli ruch tworzy odcięcie \textit{zabójczy ruch}, to prawdopodobnie wytworzy je też w podobnej sytuacji
+                        \item<3-> Założenie: jeżeli ruch tworzy odcięcie \textit{(zabójczy ruch)}, to prawdopodobnie wytworzy je też w podobnej sytuacji
                         \item<4-> Aby przyśpieszyć odcięcie algorytm rozpoczyna szukanie od zapisanych \textit{zabójczych ruchów}
                     \end{itemize}
                     %https://en.wikipedia.org/wiki/Killer_heuristic
