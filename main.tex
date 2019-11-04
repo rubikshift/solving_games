@@ -64,8 +64,8 @@
                 Właściwości rozważanych gier:
                 \begin{itemize}
                     \item<2-> Udział tylko dwóch graczy
-                    \item<3-> Przebieg nie zależy od czynników losowych
-                    \item<4-> Gracze wykonują ruchy naprzemiennie
+                    \item<3-> Gracze wykonują ruchy naprzemiennie
+                    \item<4-> Przebieg nie zależy od czynników losowych
                     \item<5-> Gracze posiadają pełną wiedzę o stanie gry
                     \item<6-> Gra kończy się po skończonej liczbie ruchów
                     \item<7-> Wygrywa gracz, który wykona ostatni ruch
@@ -103,6 +103,13 @@
                                 \item<7-> W rezultacie jest tylko $765$ różnych stanów \cite{tictactoe}
                             \end{itemize}
                         \column{0.4\textwidth}
+                            \only<1-2>{
+                                \begin{figure}[H]
+                                    \centering
+                                    \includegraphics[width=\textwidth,natwidth=540,natheight=480]{images/Tic_tac_toe.svg.png}
+                                    \caption{Kółko i krzyżyk}
+                                \end{figure}
+                            }
                             \only<3->{
                                 \begin{table}
                                     \center
@@ -171,10 +178,10 @@
                         \column{0.6\textwidth} 
                         \begin{itemize}
                             \item<1-> Matematyczna gra strategiczna
-                            \item<2-> Gracze na przemian zabiera elementy z jednego z kilku stosów
-                            \item<3-> W czasie ruchu gracz bierze dowolną niezerową liczbę pionków.
-                            \item<4-> W jednym ruchu można zabierać pionki z tylko jednego stosu
-                            \item<5-> W klasycznej wersji wygrywa gracz, który zabierze ostatniego pionka
+                            \item<2-> Gracze zabierają elementy ze stosów
+                            \item<3-> W czasie ruchu gracz bierze dowolną niezerową liczbę elementów
+                            \item<4-> W jednym ruchu można zabrać elementy z tylko jednego stosu
+                            \item<5-> W klasycznej wersji wygrywa gracz, który zabierze ostatni element
                         \end{itemize}
                         \column{0.4\textwidth}
                         \begin{figure}[H]
@@ -228,7 +235,7 @@
                                 \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
                                 \item<1-> $t = s \oplus x_k \oplus y_k$
                                 \item<2-> Jeżeli $s = 0,$ gracz wykonujący ruch przegrywa
-                                \item<3-> Jeżeli nie ma już możliwych ruchów, gra się kończyła i gracz już przegrał
+                                \item<3-> Jeżeli nie ma już możliwych ruchów, gra się skończyła i gracz już przegrał
                                 \item<4-> Każdy możliwy ruch sprawia, że $t = x_k \oplus y_k \neq 0$
                                 \item<5-> $x_k \oplus y_k \neq 0$, ponieważ gracz musi pobrać niezerową liczbę elementów
                             \end{itemize}
@@ -247,11 +254,22 @@
                                 \item<1-> $t = s \oplus x_k \oplus y_k$
                                 \item<2-> Jeżeli $s \neq 0,$ to możliwe jest wykonanie takiego ruchu, że $t = 0$, gracz wykonujący ruch wygrywa
                                 \item<3-> Żeby $t = 0$, to $y_k = s \oplus x_k$
-                                \item<4-> $t = s \oplus x_k \oplus (s \oplus x_k) \pause = 0 \pause \qed$
+                                \item<4-> $t = s \oplus x_k \oplus (s \oplus x_k) \pause = 0$
                             \end{itemize}
                     \column{0.4\textwidth}
                 \end{columns}
                     %obrazki ilustrujące stan gry
+                \end{frame}
+                \begin{frame}
+                    \frametitle{Nim - strategia}
+                    \begin{itemize}
+                        \item<1-> $x_i$ - ilość elementów przed wykonaniem ruchu na $i$-tym stosie
+                        \item<1-> $y_i$ - ilość elementów po wykonaniu ruchu na $i$-tym stosie
+                        \item<1-> Niech $s = x_1 \oplus ... \oplus x_n$
+                        \item<1-> Niech $t = y_1 \oplus ... \oplus y_n$
+                        \item<2-> Strategia wygrywająca polega na zdejmowaniu elementów taki sposób, aby zaszło $t = 0$
+                        \item<3-> Taki ruch jest możliwy wtedy i tylko wtedy, gdy $s \neq 0$ \pause $\qed$
+                    \end{itemize}
                 \end{frame}
         %\subsubsection{Zgadnij kto to?}
         %    \begin{frame}
@@ -271,11 +289,10 @@
                     \begin{columns}
                         \column{0.6\textwidth}
                         \begin{itemize}
-                            \item<1-> Chinook
-                            \item<2-> 19.07.2007 w magazynie \textit{Science} twórcy opublikowali swój dowód, że najlepsze co można osiągnąć grając przeciwko Chinook to remis
-                            \item<3-> Biblioteka ruchów otwierających
-                            \item<4-> Biblioteka końcówek dla wszystkich pozycji z liczbą pionków mniejszą lub równą 8
-                            \item<5-> Ręcznie przygotowana funkcja oceny
+                            \item<1-> Chinook - program komputerowy rozwijany w latach 1989 - 2007
+                            \item<2-> 19.07.2007 w magazynie \textit{Science} twórcy opublikowali swój dowód, że w przypadku, gdy żaden z graczy nie popełni błędu partia kończy się remisem
+                            \item<3-> Baza danych końcówek o liczbie pionów $\leq 10$
+                            \item<4-> 
                         \end{itemize}
                         \column{0.4\textwidth}
                         \begin{figure}[H]
@@ -310,7 +327,7 @@
                 \begin{itemize}
                     \item<1-> Udowodniono, że gracz wygrywa/przegrywa/remisuje ze startowej pozycji, jeżeli wszyscy grają optymalnie
                     \item<2-> Przeprowadzony dowód może być niekonstruktywny
-                    \item<3-> \textbf{Nie jest wymagane określenie żadnego z ruchów idealnej gry}
+                    \item<3-> \textbf{Nie jest wymagane określenie żadnego z ruchów optymalnej gry}
                     % go,
                     %kradziez strategii
                 \end{itemize}
@@ -321,9 +338,9 @@
                     \begin{columns}
                         \column{0.6\textwidth}
                             \begin{itemize}
-                                \item<1-> Tradycyjnie rozgrywana na planszy 11x11 (w kształcie rombu)
+                                \item<1-> Tradycyjnie rozgrywana na planszy w kształcie rombu 11x11
                                 \item<2-> Gracze dysponują kamieniami o odmiennych kolorach
-                                \item<3-> Gracze układają kamienie na przemian na wolnych polach
+                                \item<3-> Gracze układają kamienie na wolnych polach
                                 \item<4-> Wygrywa ten, który utworzy nieprzerwany ciąg łączący boki planszy własnego koloru
                             \end{itemize}
                         \column{0.4\textwidth}
@@ -360,7 +377,7 @@
                                 \item<2-> Komi to wyrównanie punktowe dla drugiego gracza
                                 \item<3-> Dowód korzysta z kradzieży strategii
                                 \item<4-> W Go można pasować
-                                \item<5-> Jeżeli białe mają strategię wygrywającą, czarne może ją ukraść pasując
+                                \item<5-> Jeżeli białe mają strategię wygrywającą, czarne może ją ukraść pasując już na początku gry
                                 \item<6-> W rezultacie czarne mogą wygrać lub zremisować przy optymalnej grze
                             \end{itemize}
                         \column{0.4\textwidth}
