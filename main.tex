@@ -325,7 +325,7 @@
                             \begin{figure}[H]
                                 \centering
                                 \includegraphics[width=\textwidth]{images/gardner.png}
-                                \caption{Startowe ułożenie w szachach gardnera 5x5}
+                                \caption{Startowe ułożenie w szachach Gardnera 5x5}
                             \end{figure}    
                     \end{columns}
                 \end{frame}
@@ -615,10 +615,11 @@
                 \frametitle{Null move}
                 %https://en.wikipedia.org/wiki/Killer_heuristic
                 \begin{itemize}
-                    \item<1-> Ruch zerowy, czyli np. pasowanie
+                    \item<1-> Ruch zerowy, czyli pasowanie
                     \item<2-> W szachach jest niedozwolony
-                    \item<3-> Założenie: każdy gracz chce polepszyć swoją sytuację
-                    \item<4-> Jednak wprowadzając analizę ruchu zerowego, można szybciej uzyskać odcięcie
+                    \item<3-> Założenie: zrzeczenie się ruchu jest gorsze niż wykonanie dowolnego legalnego ruchu
+                    \item<4-> Wykorzystywane w poszukiwaniu zagrożeń
+                    \item<5-> Może powodować błędy np. będąc szachu
                 \end{itemize}
                 %na koniec
                 %heurystyka ruchu zerowego null move, jako przyklad tylko
